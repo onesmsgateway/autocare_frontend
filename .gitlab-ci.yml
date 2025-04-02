@@ -1,0 +1,15 @@
+stages:
+  - build2
+
+variables:
+  NODE_ENV: development
+  CI: "false"
+
+build_project:
+  stage: build2
+  script:
+    - /home/conekuser/fe_deploy || { echo 'Script failed'; exit 1; }
+  only:
+    - develope
+  tags:
+    - tuyentv

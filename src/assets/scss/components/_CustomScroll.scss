@@ -1,0 +1,18 @@
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #fff; /* Màu nền của track */
+    border-radius: 10px; /* Đường viền cong */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #bfbfbf; /* Màu nền của thanh cuộn */
+    border-radius: 10px; /* Đường viền cong */
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1677ff; 
+  }
+ 

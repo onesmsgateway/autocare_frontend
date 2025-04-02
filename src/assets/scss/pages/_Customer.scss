@@ -1,0 +1,22 @@
+.addCarCustomer{
+    padding: 30px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+}
+
+// .ant-modal-confirm-paragraph{
+//     align-items: flex-start;
+// }
+.config-modal{
+    padding: 0;
+    .ant-result-icon{
+        margin-bottom: 0;
+    }
+}
+.config-hover{
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+        color: #f5222d;
+    }
+}

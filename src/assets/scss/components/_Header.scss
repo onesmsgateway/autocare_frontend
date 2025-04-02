@@ -1,0 +1,13 @@
+.responsive-alert-warning {
+  @media (max-width: 1390px) {
+    width: 300px;
+  }
+  @media (max-width: 884px) {
+    display: none;
+  }
+}
+.responsive-quota {
+  @media (max-width: 640px) {
+    width: max-content;
+  }
+}

@@ -1,0 +1,45 @@
+.editUser{
+    .ant-flex{
+        .boxedituser{
+            @media (max-width: 450px) {
+                width: 300px;
+              }
+            width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #bfbfbf;
+            #editpassword{
+                .ant-input{
+                    padding: 7px;
+                }
+            }
+            #account_bank{
+                .ant-input{
+                    padding: 7px;
+                }
+                .ant-input-number-input{
+                    padding: 7px;
+                }
+            }
+            #register{
+                .ant-input{
+                    padding: 7px;
+                }
+                .ant-upload-wrapper.ant-upload-picture-circle-wrapper .ant-upload.ant-upload-select >.ant-upload{
+                    height: initial;
+                    .upload-container {
+                        position: relative;
+                        display: inline-block;
+                        .spin-overlay {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                          }
+                      }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+.login {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  background-color: #eaf0fa;
+  .box-login {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  
+    .box-login-container {
+      @media (max-width: 450px) {
+        width: 300px;
+      }
+      width: 450px;
+      background-color: #fff;
+      margin: auto;
+      border-radius: 14px;
+      .login-box {
+        padding: 30px 30px 90px;
+        .title {
+          text-align: center;
+          h2 {
+            font-size: 24px;
+            font-weight: 500;
+            @media (max-width: 450px) {
+              font-size: 14px;
+            }
+          }
+        }
+        .form-login {
+          margin-top: 35px;
+          .ant-input {
+            padding: 7px;
+          }
+          .ant-input-number-input-wrap {
+            padding: 7px;
+          }
+        }
+      }
+    }
+  }
+}

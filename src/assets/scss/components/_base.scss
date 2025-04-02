@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #454545 !important;
+}
+h2 {
+  padding: 10px 0;
+}
+h3{
+  margin: 10px 0;
+}
+.ant-input-number-outlined {
+  width: 100%;
+}
+.ant-breadcrumb{
+  margin: 10px 0;
+}
+.ant-skeleton.ant-skeleton-element{
+  width: 90%;
+}
+.ant-radio-button-wrapper{width: 100%;}
+textarea {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.custom-mentions {
+  padding: 5px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+#addJob{
+  .ant-skeleton.ant-skeleton-element{
+    width: 100%;
+  }
+}
+.mentions__suggestions {
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.ant-modal-root {
+  .ant-modal-content {
+    .ant-modal-body {
+      max-height: 500px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 20px;
+      .render_voucher {
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: transform 0.3s ease;
+        .ant-checkbox-inner {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+.ant-tabs .ant-tabs-ink-bar{
+  background: #f5222d;
+}
+.ant-tabs-top >.ant-tabs-nav .ant-tabs-ink-bar{
+  height: 3px;
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: #f5222d;
+}
