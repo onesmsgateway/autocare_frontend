@@ -30,7 +30,7 @@ import { calculateTimeDifference } from "../../utils/dateTime";
 export default function HeaderApp() {
   const [notification, setNotification] = useState(false);
   const isAdmin = settings?.getCookie("type") === "ADMIN";
-  // const isWorkShop = settings?.getCookie("type") === "WORKSHOP";
+  const isWorkShop = settings?.getCookie("type") === "WORKSHOP";
 
   const showNotification = () => {
     setNotification(true);
