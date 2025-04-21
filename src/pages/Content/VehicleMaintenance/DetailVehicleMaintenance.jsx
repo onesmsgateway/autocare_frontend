@@ -25,7 +25,7 @@ import {
   message,
 } from "antd";
 import { ReactToPrint } from "react-to-print";
-import { PrinterOutlined } from "@ant-design/icons";
+import { MessageOutlined, PrinterOutlined, SendOutlined } from "@ant-design/icons";
 import CustomTemplatePrint from "./CustomTemplatePrint";
 import EditVehicleMaintenance from "./EditVehicleMaintenance";
 import {
@@ -301,7 +301,7 @@ export default function DetailVehicleMaintenance() {
           </div>
           <Button
             type="primary"
-            icon={<PrinterOutlined />}
+            icon={<MessageOutlined />}
             style={{ margin: "20px 10px" }}
             onClick={showConfirmSendZns}
             loading={isSendingZns}
