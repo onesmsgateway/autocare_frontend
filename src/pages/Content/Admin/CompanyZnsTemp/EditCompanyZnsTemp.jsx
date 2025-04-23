@@ -93,10 +93,10 @@ const EditCompanyZnsTemp = forwardRef(function EditCompanyZnsTemp(props, ref) {
           form={form}
         >
           <Row gutter={[8, 8]}>
-            <Col xl={8} lg={8} md={8} sm>
+            <Col xl={12} lg={12} md={12} sm>
               <Form.Item
                 label="Chọn công ty"
-                name="name"
+                name="company_id"
                 rules={[
                   {
                     required: true,
@@ -150,113 +150,45 @@ const EditCompanyZnsTemp = forwardRef(function EditCompanyZnsTemp(props, ref) {
                 </Select>
               </Form.Item>
             </Col>
-            <Col xl={8} lg={8} md={8} sm>
+            <Col xl={12} lg={12} md={12} sm>
               {" "}
               <Form.Item
-                label="Địa chỉ"
-                name="address"
-                rules={[
-                  {
-                    required: false,
-                    message: "Vui lòng nhập địa chỉ",
-                  },
-                ]}
-              >
-                <Input placeholder="Địa chỉ" />
-              </Form.Item>
-            </Col>
-            <Col xl={8} lg={8} md={8} sm>
-              {" "}
-              <Form.Item
-                label="Số điện thoại"
-                name="phone"
+                label="Temp ID"
+                name="temp_id"
                 rules={[
                   {
                     required: true,
-                    message: "Vui lòng nhập số điện thoại",
-                  },
-                  {
-                    pattern: /^0[0-9]{9}$/,
-                    message: "Số điện thoại chưa đúng định dạng!",
+                    message: "Vui lòng nhập temp id",
                   },
                 ]}
               >
-                <Input placeholder="Số điện thoại" />
+                <Input placeholder="temp id" />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={[8, 8]}>
-            <Col xl={8} lg={8} md={8} sm>
-              <Form.Item
-                label="Key"
-                name="secret_key"
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập tên công ty",
-                  },
-                ]}
-              >
-                <Input placeholder="Mã key" />
-              </Form.Item>
-            </Col>
-            <Col xl={8} lg={8} md={8} sm>
-              <Form.Item
-                label="Người quản lý"
-                name="manager_name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập người quản lý",
-                  },
-                ]}
-              >
-                <Input placeholder="Người quản lý" />
-              </Form.Item>
-            </Col>
-            <Col xl={8} lg={8} md={8} sm>
+            <Col xl={12} lg={12} md={12} sm>
               {" "}
               <Form.Item
-                label="Gói phần mềm"
-                name="software_package"
+                label="Loại gửi tin zns"
+                name="zns_type"
                 rules={[
                   {
-                    required: false,
-                    message: "Vui lòng chọn gói phần mềm",
+                    required: true,
+                    message: "Vui lòng nhập loại tin zns",
                   },
                 ]}
               >
-                <Select allowClear placeholder="Vui lòng chọn gói phần mềm">
-                  <Option value="Nhan tin">Nhắn tin</Option>
-                  <Option value="Bao duong">Xưởng sữa chữa</Option>
-                  <Option value="Full">Đầy đủ</Option>
+                <Select placeholder="zns type">
+                  <Select.Option value={"Thong ke hang ngay"}>Thống kê doanh thu hàng ngày</Select.Option>
+                  <Select.Option value={"Dat lich bao duong"}>Đặt lịch bảo dưỡng</Select.Option>
+                  <Select.Option value={"Dang bao duong"}>Đang bảo dưỡng</Select.Option>
+                  <Select.Option value={"Da bao duong va thanh toan"}>Đã bảo dưỡng và thanh toán</Select.Option>
+                  <Select.Option value={"Cam on bao duong"}>Cảm ơn bảo dưỡng</Select.Option>
+                  <Select.Option value={"Hoa don bao duong"}>Hóa đơn bảo dưỡng</Select.Option>
                 </Select>
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[8, 8]}>
-            <Col xl={8} lg={8} md={8} sm>
-              {" "}
-              <Form.Item
-                label="Số tiền nhắn tin BD"
-                name="maintain_message_amount"
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập số tiền",
-                  },
-                ]}
-              >
-                <InputNumber
-                  formatter={(value) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                  placeholder="Số tiền"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
+
           <Form.Item>
             <Button
               type="primary"
@@ -269,7 +201,7 @@ const EditCompanyZnsTemp = forwardRef(function EditCompanyZnsTemp(props, ref) {
           </Form.Item>
         </Form>
       </Modal>
-    </div>
+    </div >
   );
 });
 

@@ -472,7 +472,7 @@ export default function DetailVehicleMaintenance() {
                   <Divider />
                   {dataJob?.length !== 0 && (
                     <>
-                      <h4 style={{ margin: "20px 0" }}>Nhân công,dịch vụ</h4>
+                      <h4 style={{ margin: "20px 0" }}>Nhân công, dịch vụ</h4>
                       <Table
                         columns={columnsJob}
                         pagination={false}
