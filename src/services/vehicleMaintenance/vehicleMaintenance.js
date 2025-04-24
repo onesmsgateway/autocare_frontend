@@ -155,3 +155,20 @@ export const payMent = createAsyncThunk(
     }
   }
 );
+
+
+export const znsInvoiceVehicleMaintenance = createAsyncThunk(
+  "vehicleMaintenance/znsInvoiceVehicleMaintenance",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await http.post(
+        `/company/api/v1/maintenance/send-zns-invoice`,
+        data
+      );
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

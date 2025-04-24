@@ -5,6 +5,7 @@ import { store } from "../../../redux/configStores";
 import {
   getDetailVehicleMaintenance,
   payMent,
+  znsInvoiceVehicleMaintenance,
 } from "../../../services/vehicleMaintenance/vehicleMaintenance";
 import {
   Breadcrumb,
@@ -15,6 +16,7 @@ import {
   Empty,
   Flex,
   Image,
+  Modal,
   Row,
   Skeleton,
   Spin,
@@ -23,7 +25,7 @@ import {
   message,
 } from "antd";
 import { ReactToPrint } from "react-to-print";
-import { PrinterOutlined } from "@ant-design/icons";
+import { MessageOutlined, PrinterOutlined, SendOutlined } from "@ant-design/icons";
 import CustomTemplatePrint from "./CustomTemplatePrint";
 import EditVehicleMaintenance from "./EditVehicleMaintenance";
 import {
@@ -36,6 +38,40 @@ export default function DetailVehicleMaintenance() {
     useSelector((state) => state.vehicleMaintenance);
   const componentRef = useRef();
   const { id } = useParams();
+  const isShowButtons = ['DaBaoDuong', 'DaThanhToan'].includes(detailVehicleMaintenance?.status);
+  const [isSendingZns, setIsSendingZns] = useState(false);
+
+  const showConfirmSendZns = () => {
+    Modal.confirm({
+      title: 'Xác nhận gửi hóa đơn ZNS',
+      content: 'Bạn có chắc chắn muốn gửi hóa đơn bảo dưỡng qua ZNS?',
+      okText: 'Gửi',
+      cancelText: 'Hủy',
+      onOk: handleSendZnsInvoice
+    });
+  };
+
+  const handleSendZnsInvoice = async () => {
+    setIsSendingZns(true);
+    try {
+      const data = {
+        maintenance_id: detailVehicleMaintenance?.id
+      };
+
+      const response = await store.dispatch(znsInvoiceVehicleMaintenance(data));
+      console.log('response', response);
+      if (response?.payload?.status === 200) {
+        message.success('Đã gửi hóa đơn ZNS thành công');
+      } else {
+        message.warning(response?.payload?.message || 'Gửi hóa đơn không thành công');
+      }
+    } catch (error) {
+      console.error('Error sending ZNS invoice:', error);
+      message.error('Có lỗi xảy ra khi gửi hóa đơn');
+    } finally {
+      setIsSendingZns(false);
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       await store.dispatch(getDetailVehicleMaintenance(id));
@@ -236,30 +272,45 @@ export default function DetailVehicleMaintenance() {
           },
         ]}
       />
-      <ReactToPrint
-        trigger={() => (
+      {isShowButtons && (
+        <>
+          <ReactToPrint
+            trigger={() => (
+              <Button
+                type="primary"
+                icon={<PrinterOutlined />}
+                style={{ margin: "20px 0" }}
+              >
+                In Phiếu Bảo Dưỡng
+              </Button>
+            )}
+            content={() => componentRef.current}
+          />
+
+          <div style={{ position: "absolute", left: "-9999px" }}>
+            <div ref={componentRef}>
+              <CustomTemplatePrint
+                columns={columns}
+                dataAccessary={dataAccessary}
+                isLoadDetailVehicleMaintenance={isLoadDetailVehicleMaintenance}
+                detailVehicleMaintenance={detailVehicleMaintenance}
+                columnsJob={columnsJob}
+                dataJob={dataJob}
+              />
+            </div>
+          </div>
           <Button
             type="primary"
-            icon={<PrinterOutlined />}
-            style={{ margin: "20px 0" }}
+            icon={<MessageOutlined />}
+            style={{ margin: "20px 10px" }}
+            onClick={showConfirmSendZns}
+            loading={isSendingZns}
+            disabled={!detailVehicleMaintenance || isSendingZns}
           >
-            In Phiếu Bảo Dưỡng
+            Gửi zns hóa đơn bảo dưỡng
           </Button>
-        )}
-        content={() => componentRef.current}
-      />
-      <div style={{ position: "absolute", left: "-9999px" }}>
-        <div ref={componentRef}>
-          <CustomTemplatePrint
-            columns={columns}
-            dataAccessary={dataAccessary}
-            isLoadDetailVehicleMaintenance={isLoadDetailVehicleMaintenance}
-            detailVehicleMaintenance={detailVehicleMaintenance}
-            columnsJob={columnsJob}
-            dataJob={dataJob}
-          />
-        </div>
-      </div>
+        </>
+      )}
       <div className="detail-vehicle-maintain">
         <div style={{ padding: 30 }}>
           {isLoadDetailVehicleMaintenance ? (
@@ -421,7 +472,7 @@ export default function DetailVehicleMaintenance() {
                   <Divider />
                   {dataJob?.length !== 0 && (
                     <>
-                      <h4 style={{ margin: "20px 0" }}>Nhân công,dịch vụ</h4>
+                      <h4 style={{ margin: "20px 0" }}>Nhân công, dịch vụ</h4>
                       <Table
                         columns={columnsJob}
                         pagination={false}

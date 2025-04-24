@@ -59,7 +59,6 @@ import TableAccountManage from "../pages/Content/Admin/AccountManage/TableAccoun
 import PositionPermission from "../pages/Content/Position/Permission";
 import TableMaintenanceDebt from "../pages/Content/MaintenanceDebt/TableMaintenanceDebt";
 import TableCompanyZnsTemp from "../pages/Content/Admin/CompanyZnsTemp/TableCompanyZnsTemp";
-// import DetailMaintenanceDebt from "../pages/Content/MaintenanceDebt/DetailMaintenanceDebt";
 
 const history = createBrowserHistory();
 export default function Router() {
