@@ -190,7 +190,7 @@ export default function AddCompany({ currentPage, pageSize }) {
               </Form.Item>
             </Col>
 
-            <Col xl={8} lg={8} md={8} sm>
+            {/* <Col xl={8} lg={8} md={8} sm>
               {" "}
               <Form.Item
                 label="Pass Zns"
@@ -204,7 +204,7 @@ export default function AddCompany({ currentPage, pageSize }) {
               >
                 <Input.Password placeholder="Pass Zns" />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
           <Row><Typography.Text type="secondary" style={{ fontSize: "12px" }}>Thông tin đăng nhập phục vụ cho việc gửi tin nhắn Zalo.</Typography.Text></Row>
           <Form.Item>
