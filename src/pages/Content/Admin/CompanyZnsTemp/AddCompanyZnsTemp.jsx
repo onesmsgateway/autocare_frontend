@@ -146,6 +146,10 @@ export default function AddCompanyZnsTemp({ currentPage, pageSize }) {
                   <Select.Option value={"Da bao duong va thanh toan"}>Đã bảo dưỡng và thanh toán</Select.Option>
                   <Select.Option value={"Cam on bao duong"}>Cảm ơn bảo dưỡng</Select.Option>
                   <Select.Option value={"Hoa don bao duong"}>Hóa đơn bảo dưỡng</Select.Option>
+                  <Select.Option value={"Bao duong dinh ky"}>Bảo dưỡng định kỳ</Select.Option>
+                  <Select.Option value={"Bao duong dich vu"}>Bảo dưỡng dịch vụ</Select.Option>
+                  <Select.Option value={"Cam on mua xe"}>Cảm ơn mua xe</Select.Option>
+                  <Select.Option value={"Chuc mung sinh nhat"}>Chúc mừng sinh nhật</Select.Option>
                 </Select>
               </Form.Item>
             </Col>

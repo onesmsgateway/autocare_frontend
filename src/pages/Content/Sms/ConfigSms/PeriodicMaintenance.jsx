@@ -4,6 +4,7 @@ import {
   Col,
   Form,
   InputNumber,
+  Radio,
   Row,
   Skeleton,
   Switch,
@@ -47,6 +48,7 @@ export default function PeriodicMaintenance() {
       sms_maintain_2: config?.sms_maintain_2,
       day_after: config?.day_after,
       time_send: config ? dayjs(config.time_send, "HH:mm:ss") : undefined,
+      message_type: config?.message_type || "sms",
     });
   }, [form, config]);
   const onFinish = async (values) => {
@@ -151,17 +153,21 @@ export default function PeriodicMaintenance() {
               </Form.Item>
             </Col>
             <Col xl={12} lg={12} md={24} sm={24}>
+              
               <Form.Item
-                label="Số lần ứng với số km"
-                name="times_to_km"
+                label="Loại tin nhắn"
+                name="message_type"
                 rules={[
                   {
                     required: true,
-                    message: "Vui lòng nhập số lần",
+                    message: "Vui lòng chọn loại tin nhắn",
                   },
                 ]}
               >
-                <Input placeholder="Số lần" />
+                <Radio.Group>
+                  <Radio value="sms">SMS</Radio>
+                  <Radio value="zns">ZNS</Radio>
+                </Radio.Group>
               </Form.Item>
             </Col>
           </Row>
