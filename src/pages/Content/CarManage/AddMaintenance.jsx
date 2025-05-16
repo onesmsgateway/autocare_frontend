@@ -252,7 +252,6 @@ export default function AddMaintenance() {
       setShowType(false);
     }
   };
-  console.log('reeA', selectedAccessories);
   
   return (
     <>

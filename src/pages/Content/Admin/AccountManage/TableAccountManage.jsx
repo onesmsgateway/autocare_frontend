@@ -63,13 +63,7 @@ export default function TableAcountManage() {
 
   const columns = [
     {
-      title: "ID Chi nhánh",
-      dataIndex: "company_id",
-      editable: true,
-      width: "14%",
-    },
-    {
-      title: "Tên chi nhánh",
+      title: "Tên công ty",
       dataIndex: "company",
       editable: true,
       width: "14%",
@@ -163,11 +157,11 @@ export default function TableAcountManage() {
         key: index,
         id: items.id,
         company_id: items?.company_id,
-        company: items?.user?.company?.name,
-        username: items?.user?.username,
-        phone: items?.user?.phone,
-        zalo_id: items?.user?.zalo_id,
-        created_at: items.user?.created_at,
+        company: items?.company?.name,
+        username: items?.username,
+        phone: items?.phone,
+        zalo_id: items?.zalo_id,
+        created_at: items?.created_at,
       };
     });
     setData(dataNew);

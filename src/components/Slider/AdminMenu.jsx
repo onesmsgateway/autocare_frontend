@@ -17,6 +17,7 @@ import { settings } from "../../utils/config";
 
 const isAdmin = settings?.getCookie("type") === "ADMIN";
 const isWorkShop = settings?.getCookie("type") === "WORKSHOP";
+const isManager = settings?.getCookie("type") === "MANAGER";
 export const menuItems = [
   {
     key: "home",
