@@ -47,7 +47,7 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
     form.setFieldsValue({
       store_id: updateRecord?.store_id,
       name_bike: updateRecord?.name_bike,
-      license_plate: updateRecord?.license_plate,
+      // license_plate: updateRecord?.license_plate,
       frame_number: updateRecord?.frame_number,
       machine_number: updateRecord?.machine_number,
       maintain_quantity: updateRecord?.maintain_quantity,
@@ -102,7 +102,7 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
                 <Input placeholder="Tên xe" />
               </Form.Item>
             </Col>
-            <Col xl={12} lg={12} md={12} sm>
+            {/* <Col xl={12} lg={12} md={12} sm>
               <Form.Item
                 name="license_plate"
                 label="Biển số"
@@ -119,7 +119,7 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
               >
                 <Input placeholder="Ví dụ : 29C1-99999" />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
           <Row gutter={[8, 8]}>
             <Col xl={12} lg={12} md={12} sm>
