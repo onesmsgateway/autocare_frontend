@@ -514,10 +514,10 @@ export default function AddCar() {
       formAdd.setFieldsValue({
         vehicle_id: selectedVehicle.id,
         name_bike: selectedVehicle.name_bike,
-        license_plate: selectedVehicle.license_plate,
-        frame_number: selectedVehicle.frame_number,
-        machine_number: selectedVehicle.machine_number,
-        warranty_number: selectedVehicle.warranty_number,
+        // license_plate: selectedVehicle.license_plate,
+        // frame_number: selectedVehicle.frame_number,
+        // machine_number: selectedVehicle.machine_number,
+        // warranty_number: selectedVehicle.warranty_number,
         motor_price: parseFloat(selectedVehicle.motor_price)
       });
     } else {
@@ -534,7 +534,7 @@ export default function AddCar() {
       };
 
       const response = await store.dispatch(createCarManage(values));
-
+      console.log('response', response);
       if (createCarManage.fulfilled.match(response)) {
         formAdd.resetFields();
         Modal.confirm({
@@ -545,7 +545,7 @@ export default function AddCar() {
           },
         });
       } else {
-        throw new Error("Thêm xe thất bại");
+        message.error(response?.payload?.message || "Thêm xe thất bại");
       }
     } catch (error) {
       message.error(error.message || "Có lỗi xảy ra");
@@ -647,17 +647,6 @@ export default function AddCar() {
                 label="Chọn xe"
                 rules={[{ required: true, message: "Vui lòng chọn xe" }]}
               >
-                {/* <Select
-                  placeholder="Chọn xe"
-                  onChange={handleVehicleSelect}
-                >
-                  {vehicleList.map(vehicle => (
-                    <Option key={vehicle.id} value={vehicle.id}>
-                      {vehicle.name}
-                    </Option>
-                  ))}
-                </Select> */}
-
                 <Select
                   onChange={handleVehicleSelect}
                   allowClear
@@ -735,7 +724,7 @@ export default function AddCar() {
             >
               <Input
                 placeholder="Ví dụ: 29C1-99999"
-                disabled={selectedType === 'XeBan'}
+              // disabled={selectedType === 'XeBan'}
               />
             </Form.Item>
           </Col>
@@ -745,30 +734,32 @@ export default function AddCar() {
           <Col xl={12} lg={12}>
             <Form.Item name="frame_number" label="Số khung"
               rules={[
-                { required: selectedType !== 'XeBan', message: "Vui lòng nhập số khung" }
+                { required: selectedType === 'XeBan', message: "Vui lòng nhập số khung" }
               ]}>
               <Input
                 placeholder="Số khung"
-                disabled={selectedType === 'XeBan'}
+              // disabled={selectedType === 'XeBan'}
               />
             </Form.Item>
           </Col>
           <Col xl={12} lg={12}>
             <Form.Item name="machine_number" label="Số máy"
               rules={[
-                { required: selectedType !== 'XeBan', message: "Vui lòng nhập số máy" }
+                { required: selectedType === 'XeBan', message: "Vui lòng nhập số máy" }
               ]}>
               <Input
                 placeholder="Số máy"
-                disabled={selectedType === 'XeBan'}
+              // disabled={selectedType === 'XeBan'}
               />
             </Form.Item>
           </Col>
           <Col xl={12} lg={12}>
-            <Form.Item name="warranty_number" label="Số bảo hành">
+            <Form.Item name="warranty_number" label="Số bảo hành" rules={[
+              { required: selectedType === 'XeBan', message: "Vui lòng nhập số bảo hành" }
+            ]}>
               <Input
                 placeholder="Số bảo hành"
-                disabled={selectedType === 'XeBan'}
+              // disabled={selectedType === 'XeBan'}
               />
             </Form.Item>
           </Col>
