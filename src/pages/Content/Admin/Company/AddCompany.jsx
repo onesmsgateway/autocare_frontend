@@ -28,7 +28,7 @@ export default function AddCompany({ currentPage, pageSize }) {
         title="Thêm công ty"
         open={isModalOpen}
         footer={null}
-        width={650}
+        width={690}
         onCancel={handleCancel}
       >
         <Form
@@ -89,7 +89,7 @@ export default function AddCompany({ currentPage, pageSize }) {
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
-            <Col xl={8} lg={8} md={8} sm>
+            {/* <Col xl={8} lg={8} md={8} sm>
               <Form.Item
                 label="Key"
                 name="secret_key"
@@ -102,7 +102,7 @@ export default function AddCompany({ currentPage, pageSize }) {
               >
                 <Input placeholder="Mã key" />
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col xl={8} lg={8} md={8} sm>
               <Form.Item
                 label="Người quản lý"
@@ -136,9 +136,24 @@ export default function AddCompany({ currentPage, pageSize }) {
                 </Select>
               </Form.Item>
             </Col>
+            <Col xl={8} lg={8} md={8} sm>
+              {" "}
+              <Form.Item
+                label="OA Zns"
+                name="oa_zns"
+                rules={[
+                  {
+                    required: false,
+                    message: "Vui lòng nhập oa zns",
+                  },
+                ]}
+              >
+                <Input placeholder="OA Zns" />
+              </Form.Item>
+            </Col>
           </Row>
           <Row gutter={[8, 8]}>
-            <Col xl={8} lg={8} md={8} sm>
+            {/* <Col xl={8} lg={8} md={8} sm>
               {" "}
               <Form.Item
                 label="Số tiền nhắn tin BD"
@@ -158,22 +173,8 @@ export default function AddCompany({ currentPage, pageSize }) {
                   placeholder="Số tiền"
                 />
               </Form.Item>
-            </Col>
-            <Col xl={8} lg={8} md={8} sm>
-              {" "}
-              <Form.Item
-                label="OA Zns"
-                name="oa_zns"
-                rules={[
-                  {
-                    required: false,
-                    message: "Vui lòng nhập oa zns",
-                  },
-                ]}
-              >
-                <Input placeholder="OA Zns" />
-              </Form.Item>
-            </Col>
+            </Col> */}
+           
             <Col xl={8} lg={8} md={8} sm>
               {" "}
               <Form.Item

@@ -72,8 +72,13 @@ export const menuItems = [
     children: [
       {
         key: "add-car",
-        label: "Thêm xe",
+        label: "Thêm xe khách hàng",
         path: "/add-car",
+      },
+      {
+        key: "list-car-customer",
+        label: "Danh sách xe khách hàng",
+        path: "/car-customer-manage",
       },
       {
         key: "list-car",

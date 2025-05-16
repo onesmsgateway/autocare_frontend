@@ -40,6 +40,7 @@ import post from "./post/post";
 import miniDashboard from "./miniDashboard/miniDashboard";
 import maintenanceDebt from "./maintenanceDebt/maintenanceDebt";
 import companyZnsTemp from "./companyZnsTemp/companyZnsTemp";
+import motorStore from "./motorStore/motorStore";
 
 const persistConfig = {
   key: "data",
@@ -77,9 +78,9 @@ export const rootReducers = combineReducers({
   notifications,
   post,
   miniDashboard,
-  maintenanceDebt
+  maintenanceDebt,
+  motorStore
 });
-console.log('ff', maintenanceDebt);
 const thunkMiddleware = (store) => (next) => (action) => {
   if (typeof action === "function") {
     return action(store.dispatch, store.getState);
