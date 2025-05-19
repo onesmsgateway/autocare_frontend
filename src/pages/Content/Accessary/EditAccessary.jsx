@@ -24,10 +24,9 @@ import usePaginationSelect from "../../../components/CustomHooks/usePaginationSe
 import {
   editAccessarys,
   getListAccessarys,
-  verifyAccessaryUpdateOtp,
-  generateAccessaryUpdateOtp
 } from "../../../services/accessarys/accessarys";
 import { reGexIsNumber } from "../../../utils/config";
+import { generateUpdateOtp, verifyUpdateOtp } from "../../../services/otp/otp";
 const { Option } = Select;
 const EditAccessary = forwardRef(function EditAccessary(props, ref) {
   const { listWarehouse, isLoadWarehouse } = useSelector(
@@ -95,7 +94,7 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
       setCountdown(60); // 60 giây
       setIsOtpResendDisabled(true);
       setOtpLoading(true);
-      const response = await store.dispatch(generateAccessaryUpdateOtp({ 'accessary_id': record?.id }));
+      const response = await store.dispatch(generateUpdateOtp({ 'object_id': record?.id, 'object_type' : 'accessary' }));
       if (response?.payload?.success) {
         message.success('Đã gửi mã OTP');
         setOtpPhone(response.phone);
@@ -118,7 +117,7 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
       setOtpLoading(true);
 
       const otpValue = otpForm.getFieldValue('otp');
-      const response = await store.dispatch(verifyAccessaryUpdateOtp({
+      const response = await store.dispatch(verifyUpdateOtp({
         otp_code: otpValue,
         // phone: otpPhone,
         type: 'accessary_update'
