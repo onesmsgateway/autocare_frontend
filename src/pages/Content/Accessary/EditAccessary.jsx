@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { EditOutlined, SyncOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -13,6 +13,7 @@ import {
   InputNumber,
   Radio,
   Space,
+  message
 } from "antd";
 import { useDispatch } from "react-redux";
 import useEditHandler from "../../../components/CustomHooks/useEditHandler";
@@ -23,6 +24,8 @@ import usePaginationSelect from "../../../components/CustomHooks/usePaginationSe
 import {
   editAccessarys,
   getListAccessarys,
+  verifyAccessaryUpdateOtp,
+  generateAccessaryUpdateOtp
 } from "../../../services/accessarys/accessarys";
 import { reGexIsNumber } from "../../../utils/config";
 const { Option } = Select;
@@ -34,6 +37,7 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
     props;
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const [otpForm] = Form.useForm();
   const {
     isModalOpenEdit,
     onFinish,
@@ -57,8 +61,16 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
       value: item?.id,
     };
   });
+
+  // Thêm state để disable nút gửi lại OTP
+  const [isOtpResendDisabled, setIsOtpResendDisabled] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [isOtpModalVisible, setIsOtpModalVisible] = useState(false);
+  const [pendingUpdateData, setPendingUpdateData] = useState(null);
+  const [otpPhone, setOtpPhone] = useState(null); // Thêm state này
   useEffect(() => {
     form.setFieldsValue({
+      id: updateRecord?.id,
       code_accessary: updateRecord?.code_accessary,
       warehouse_id: updateRecord?.warehouse_id,
       price: updateRecord?.price,
@@ -75,6 +87,156 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
       pay_money: updateRecord?.pay_money,
     });
   }, [updateRecord, form, isModalOpenEdit]);
+
+  // Sinh OTP
+  const handleGenerateOtp = async (values) => {
+    try {
+      // Reset countdown
+      setCountdown(60); // 60 giây
+      setIsOtpResendDisabled(true);
+      setOtpLoading(true);
+      const response = await store.dispatch(generateAccessaryUpdateOtp({ 'accessary_id': record?.id }));
+      if (response?.payload?.success) {
+        message.success('Đã gửi mã OTP');
+        setOtpPhone(response.phone);
+        setIsOtpModalVisible(true);
+        setPendingUpdateData(values);
+      } else {
+        message.error(response?.payload?.message || 'Lỗi sinh OTP');
+      }
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  // Xác thực OTP
+  const handleVerifyOtp = async () => {
+    try {
+      await otpForm.validateFields();
+      setOtpLoading(true);
+
+      const otpValue = otpForm.getFieldValue('otp');
+      const response = await store.dispatch(verifyAccessaryUpdateOtp({
+        otp_code: otpValue,
+        // phone: otpPhone,
+        type: 'accessary_update'
+      }));
+      console.log('response verify', response);
+      if (response.payload?.success) {
+        setIsOtpModalVisible(false);
+        onFinish(pendingUpdateData);
+        message.success('Xác thực OTP thành công');
+      } else {
+        // Xử lý lỗi chi tiết
+        const errorMessage = response.payload?.errors
+          ? Object.values(response.payload.errors)[0][0]
+          : (response.payload?.message || 'Mã OTP không chính xác');
+
+        message.error(errorMessage);
+      }
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  // Xử lý submit form
+  const handleFinish = (values) => {
+    const hasInventoryChange =
+      values.inventory_quantity !== updateRecord.inventory_quantity;
+
+    if (hasInventoryChange) {
+      // Sinh OTP nếu thay đổi số lượng
+      handleGenerateOtp(values);
+    } else {
+      // Update ngay nếu không thay đổi số lượng
+      onFinish(values);
+    }
+  };
+
+  // Modal OTP
+  const renderOtpModal = () => (
+    <Modal
+      title="Xác Thực OTP"
+      open={isOtpModalVisible}
+      onOk={handleVerifyOtp}
+      onCancel={() => {
+        setIsOtpModalVisible(false);
+        setPendingUpdateData(null);
+        otpForm.resetFields();
+      }}
+      confirmLoading={otpLoading}
+      okText="Xác Nhận"
+      cancelText="Hủy"
+    >
+      <Form form={otpForm}>
+        <Form.Item
+          name="otp"
+          rules={[
+            { required: true, message: 'Vui lòng nhập mã OTP' },
+            // {
+            //   len: 6,
+            //   message: 'Mã OTP phải có 6 chữ số'
+            // },
+            {
+              validator: async (_, value) => {
+                if (value && !/^\d{6}$/.test(value)) {
+                  throw new Error('Mã OTP phải là 6 chữ số');
+                }
+              }
+            }
+          ]}
+        >
+          <Input
+            placeholder="Nhập mã OTP 6 chữ số"
+            maxLength={6}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              // Chỉ cho phép nhập số
+              otpForm.setFieldValue('otp', inputValue.replace(/\D/g, ''));
+            }}
+          />
+        </Form.Item>
+        <Button
+          onClick={handleGenerateOtp}
+          disabled={isOtpResendDisabled}
+        >
+          {isOtpResendDisabled
+            ? `Gửi lại OTP (${countdown}s)`
+            : 'Gửi OTP'}
+        </Button>
+      </Form>
+
+    </Modal>
+  );
+
+  const [countdown, setCountdown] = useState(0);
+
+  // Sửa useEffect countdown
+  useEffect(() => {
+    let timer = null; // Thay vì NodeJS.Timeout
+    if (countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown(prev => {
+          if (prev === 1) {
+            setIsOtpResendDisabled(false);
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    
+    // Cleanup interval khi component unmount
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [countdown]);
+
   return (
     <div>
       <Tooltip placement="top" title="Sửa">
@@ -99,8 +261,9 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
         onCancel={handleCancelEdit}
       >
         <Form
-          name="addAccessary"
-          onFinish={onFinish}
+          name="editAccessary"
+          // onFinish={onFinish}
+          onFinish={handleFinish}
           layout="vertical"
           requiredMark=""
           form={form}
@@ -385,6 +548,8 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
           </Form.Item>
         </Form>
       </Modal>
+      {/* Thêm modal OTP */}
+      {renderOtpModal()}
     </div>
   );
 });
@@ -392,3 +557,5 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
 EditAccessary.displayName = "EditAccessary";
 
 export default EditAccessary;
+
+

@@ -103,3 +103,34 @@ export const exportExcelAccessarys = createAsyncThunk(
     }
   }
 );
+
+export const generateAccessaryUpdateOtp  = createAsyncThunk(
+  "accessarys/generateAccessaryUpdateOtp ",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log('data', data);
+      const response = await http.post(
+        `/company/api/v1/accessary/generate-update-otp`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const verifyAccessaryUpdateOtp  = createAsyncThunk(
+  "accessarys/verifyAccessaryUpdateOtp ",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await http.post(
+        `/company/api/v1/accessary/verify-update-otp`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
