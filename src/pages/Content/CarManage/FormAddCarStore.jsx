@@ -87,7 +87,7 @@ export default function FormAddCarStore({ currentPage, pageSize }) {
                                 name="frame_number"
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message: "Vui lòng nhập số khung",
                                     },
 
@@ -101,7 +101,7 @@ export default function FormAddCarStore({ currentPage, pageSize }) {
                             <Form.Item
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message: "Vui lòng nhập số máy ",
                                     },
                                 ]}
@@ -116,7 +116,7 @@ export default function FormAddCarStore({ currentPage, pageSize }) {
                             <Form.Item
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message: "Vui lòng nhập số bảo hành ",
                                     },
                                 ]}
