@@ -41,6 +41,7 @@ import miniDashboard from "./miniDashboard/miniDashboard";
 import maintenanceDebt from "./maintenanceDebt/maintenanceDebt";
 import companyZnsTemp from "./companyZnsTemp/companyZnsTemp";
 import motorStore from "./motorStore/motorStore";
+import activityLog from "./activityLog/activityLog";
 
 const persistConfig = {
   key: "data",
@@ -79,7 +80,8 @@ export const rootReducers = combineReducers({
   post,
   miniDashboard,
   maintenanceDebt,
-  motorStore
+  motorStore,
+  activityLog
 });
 const thunkMiddleware = (store) => (next) => (action) => {
   if (typeof action === "function") {

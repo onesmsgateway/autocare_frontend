@@ -315,6 +315,26 @@ export const menuItems = [
           },
         ],
   },
+  {
+    key: "activity",
+    label: "Hoạt động",
+    icon: <FileTextOutlined />,
+    children:
+      isWorkShop
+        ? [
+          {
+            key: "activity-log-accessary",
+            label: "Lịch sử phụ tùng phụ kiện",
+            path: "/activity-log-accessary",
+          },
+          {
+            key: "activity-log-motor",
+            label: "Lịch sử xe",
+            path: "/activity-log-motor",
+          },
+        ]
+        : [],
+  },
 ];
 export const rootSubmenuKeys = [
   "home",
@@ -332,4 +352,5 @@ export const rootSubmenuKeys = [
   "car",
   "timekeeping",
   "post",
+
 ];
