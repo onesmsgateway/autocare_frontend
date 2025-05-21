@@ -54,7 +54,7 @@ export default function FormAddCarStore({ currentPage, pageSize }) {
                 title="Thêm xe"
                 open={isModalOpen}
                 footer={null}
-                width={850}
+                width={650}
                 onCancel={handleCancel}
             >
                 <Form
@@ -79,9 +79,23 @@ export default function FormAddCarStore({ currentPage, pageSize }) {
                                 <Input placeholder="Tên xe" />
                             </Form.Item>
                         </Col>
+                        <Col xl={12} lg={12} md={12} sm>
+                            <Form.Item
+                                label="Số lượng"
+                                name="quantity"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Vui lòng nhập số lượng xe",
+                                    },
+                                ]}
+                            >
+                                <InputNumber placeholder="Số lượng" />
+                            </Form.Item>
+                        </Col>
                     </Row>
                     <Row gutter={[8, 8]}>
-                        <Col xl={12} lg={12} md={12} sm>
+                        {/* <Col xl={12} lg={12} md={12} sm>
                             <Form.Item
                                 label="Số khung"
                                 name="frame_number"
@@ -125,21 +139,8 @@ export default function FormAddCarStore({ currentPage, pageSize }) {
                             >
                                 <Input placeholder="Số bảo hành" />
                             </Form.Item>
-                        </Col>
-                        <Col xl={12} lg={12} md={12} sm>
-                            <Form.Item
-                                label="Số lượng"
-                                name="quantity"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Vui lòng nhập số lượng xe",
-                                    },
-                                ]}
-                            >
-                                <InputNumber placeholder="Số lượng" />
-                            </Form.Item>
-                        </Col>
+                        </Col> */}
+                        
                     </Row>
 
                     <Form.Item

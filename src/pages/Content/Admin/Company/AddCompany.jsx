@@ -153,27 +153,6 @@ export default function AddCompany({ currentPage, pageSize }) {
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
-            {/* <Col xl={8} lg={8} md={8} sm>
-              {" "}
-              <Form.Item
-                label="Số tiền nhắn tin BD"
-                name="maintain_message_amount"
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập số tiền",
-                  },
-                ]}
-              >
-                <InputNumber
-                  formatter={(value) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                  placeholder="Số tiền"
-                />
-              </Form.Item>
-            </Col> */}
            
             <Col xl={8} lg={8} md={8} sm>
               {" "}
@@ -190,22 +169,6 @@ export default function AddCompany({ currentPage, pageSize }) {
                 <Input placeholder="User Zns" />
               </Form.Item>
             </Col>
-
-            {/* <Col xl={8} lg={8} md={8} sm>
-              {" "}
-              <Form.Item
-                label="Pass Zns"
-                name="pass_zns"
-                rules={[
-                  {
-                    required: false,
-                    message: "Vui lòng nhập pass zns",
-                  },
-                ]}
-              >
-                <Input.Password placeholder="Pass Zns" />
-              </Form.Item>
-            </Col> */}
           </Row>
           <Row><Typography.Text type="secondary" style={{ fontSize: "12px" }}>Thông tin đăng nhập phục vụ cho việc gửi tin nhắn Zalo.</Typography.Text></Row>
           <Form.Item>

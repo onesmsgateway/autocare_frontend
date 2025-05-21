@@ -76,6 +76,7 @@ export default function TableCompany() {
         teamplate_zns_thank_maintain_schedule:
           items?.teamplate_zns_thank_maintain_schedule,
         created_at: items.created_at,
+        oa_zns: items.oa_zns
       };
     });
     setData(dataNew);

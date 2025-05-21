@@ -234,7 +234,7 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
         title="Sửa thông tin xe"
         open={isModalOpenEdit}
         footer={null}
-        width={850}
+        width={650}
         onCancel={handleCancelEdit}
       >
         <Form
@@ -260,6 +260,20 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
                 <Input placeholder="Tên xe" />
               </Form.Item>
             </Col>
+            <Col xl={12} lg={12} md={12} sm>
+              <Form.Item
+                label="Số lượng"
+                name="quantity"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng nhập số lượng xe",
+                  },
+                ]}
+              >
+                <InputNumber placeholder="Số lượng" />
+              </Form.Item>
+            </Col>
             {/* <Col xl={12} lg={12} md={12} sm>
               <Form.Item
                 name="license_plate"
@@ -279,7 +293,7 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
               </Form.Item>
             </Col> */}
           </Row>
-          <Row gutter={[8, 8]}>
+          {/* <Row gutter={[8, 8]}>
             <Col xl={12} lg={12} md={12} sm>
               <Form.Item
                 label="Số khung"
@@ -325,21 +339,8 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
                 <Input placeholder="Số bảo hành" />
               </Form.Item>
             </Col>
-            <Col xl={12} lg={12} md={12} sm>
-              <Form.Item
-                label="Số lượng"
-                name="quantity"
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập số lượng xe",
-                  },
-                ]}
-              >
-                <InputNumber placeholder="Số lượng" />
-              </Form.Item>
-            </Col>
-          </Row>
+           
+          </Row> */}
 
           <Form.Item
             name="motor_price"
