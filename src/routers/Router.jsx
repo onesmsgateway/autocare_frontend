@@ -59,6 +59,9 @@ import TableAccountManage from "../pages/Content/Admin/AccountManage/TableAccoun
 import PositionPermission from "../pages/Content/Position/Permission";
 import TableMaintenanceDebt from "../pages/Content/MaintenanceDebt/TableMaintenanceDebt";
 import TableCompanyZnsTemp from "../pages/Content/Admin/CompanyZnsTemp/TableCompanyZnsTemp";
+import TableCarStoreManage from "../pages/Content/CarManage/TableCarStoreManage";
+import ActivityLogAccessary from "../pages/Content/ActivityLog/ActivityLogAccessary";
+import ActivityLogMotor from "../pages/Content/ActivityLog/ActivityLogMotor";
 
 const history = createBrowserHistory();
 export default function Router() {
@@ -123,7 +126,8 @@ export default function Router() {
                   <Route path="/detail-vehicle-maintenance">
                     <Route path=":id" element={<DetailVehicleMaintenance />} />
                   </Route>
-                  <Route path="/car-manage" element={<TableCarManage />} />
+                  <Route path="/car-customer-manage" element={<TableCarManage />} />
+                  <Route path="/car-manage" element={<TableCarStoreManage />} />
                   <Route
                     path="/detail-car-manage/:id"
                     element={<DetailCarManager />}
@@ -165,6 +169,14 @@ export default function Router() {
                   <Route
                     path="/category-post"
                     element={<TableCategoryPost />}
+                  />
+                  <Route
+                    path="/activity-log-motor"
+                    element={<ActivityLogMotor />}
+                  />
+                   <Route
+                    path="/activity-log-accessary"
+                    element={<ActivityLogAccessary />}
                   />
                 </Route>
               </Route>

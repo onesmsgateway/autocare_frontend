@@ -17,6 +17,7 @@ import { settings } from "../../utils/config";
 
 const isAdmin = settings?.getCookie("type") === "ADMIN";
 const isWorkShop = settings?.getCookie("type") === "WORKSHOP";
+const isManager = settings?.getCookie("type") === "MANAGER";
 export const menuItems = [
   {
     key: "home",
@@ -72,8 +73,13 @@ export const menuItems = [
     children: [
       {
         key: "add-car",
-        label: "Thêm xe",
+        label: "Thêm xe khách hàng",
         path: "/add-car",
+      },
+      {
+        key: "list-car-customer",
+        label: "Danh sách xe khách hàng",
+        path: "/car-customer-manage",
       },
       {
         key: "list-car",
@@ -309,6 +315,26 @@ export const menuItems = [
           },
         ],
   },
+  {
+    key: "activity",
+    label: "Hoạt động",
+    icon: <FileTextOutlined />,
+    children:
+      isWorkShop
+        ? [
+          {
+            key: "activity-log-accessary",
+            label: "Lịch sử phụ tùng phụ kiện",
+            path: "/activity-log-accessary",
+          },
+          {
+            key: "activity-log-motor",
+            label: "Lịch sử xe",
+            path: "/activity-log-motor",
+          },
+        ]
+        : [],
+  },
 ];
 export const rootSubmenuKeys = [
   "home",
@@ -326,4 +352,5 @@ export const rootSubmenuKeys = [
   "car",
   "timekeeping",
   "post",
+
 ];

@@ -126,20 +126,21 @@ function renderMenuItems(items, userData) {
   if (!userData) return null;
 
   const hideForRoles = {
-    // WORKSHOP: [
-    //   "branchname",
-    //   "customer",
-    //   "category",
-    //   "sms",
-    //   "personnel",
-    //   "job",
-    //   "maintenance",
-    //   "maintenanceDebt",
-    //   "account",
-    //   "car",
-    //   "quota",
-    //   "timekeeping",
-    // ],
+    WORKSHOP: [
+      "branchname",
+      // "customer",
+      // "category",
+      // "sms",
+      // "personnel",
+      // "job",
+      // "maintenance",
+      // "maintenanceDebt",
+      "account",
+      // "car",
+      "quota",
+      // "timekeeping",
+      "companyBranch",
+    ],
     MANAGER: [
       "branchname",
       "companyBranch",
@@ -161,6 +162,7 @@ function renderMenuItems(items, userData) {
       "accountManage",
       "quota",
       "timekeeping",
+      
     ],
     CUSTOMER: [
       "home",

@@ -1,8 +1,11 @@
 import { SyncOutlined } from "@ant-design/icons";
 import {
   Button,
+  Col,
   Form,
   Input,
+  Radio,
+  Row,
   Skeleton,
   TimePicker,
   message,
@@ -39,6 +42,7 @@ export default function ServiceMaintenance() {
     form.setFieldsValue({
       send_month_after_buy: config?.send_month_after_buy,
       send_hours: config ? dayjs(config.send_hours, "HH:mm:ss") : undefined,
+      message_type: config?.message_type || "sms",
     });
   }, [form, config]);
   const onFinish = async (values) => {
@@ -81,30 +85,56 @@ export default function ServiceMaintenance() {
           requiredMark=""
           form={form}
         >
-          <Form.Item
-            label="Giờ gửi"
-            name="send_hours"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng chọn giờ gửi",
-              },
-            ]}
-          >
-            <TimePicker style={{ width: "100%" }} />
-          </Form.Item>
-          <Form.Item
-            label="Sau số tháng nhắn tin dịch vụ"
-            name="send_month_after_buy"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng chọn số tháng",
-              },
-            ]}
-          >
-            <Input placeholder="Số tháng" />
-          </Form.Item>
+          <Row gutter={[8, 8]}>
+            <Col xl={12} lg={12} md={24} sm={24}>
+            <Form.Item
+              label="Giờ gửi"
+              name="send_hours"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng chọn giờ gửi",
+                },
+              ]}
+            >
+              <TimePicker style={{ width: "100%" }} />
+            </Form.Item>
+            </Col>
+            <Col xl={12} lg={12} md={24} sm={24}>
+            <Form.Item
+              label="Sau số tháng nhắn tin dịch vụ"
+              name="send_month_after_buy"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng chọn số tháng",
+                },
+              ]}
+            >
+              <Input placeholder="Số tháng" />
+            </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[8, 8]}>
+          <Col xl={12} lg={12} md={24} sm={24}>
+              
+              <Form.Item
+                label="Loại tin nhắn"
+                name="message_type"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng chọn loại tin nhắn",
+                  },
+                ]}
+              >
+                <Radio.Group>
+                  <Radio value="sms">SMS</Radio>
+                  <Radio value="zns">ZNS</Radio>
+                </Radio.Group>
+              </Form.Item>
+            </Col>
+          </Row>
           <Form.Item>
             <Button
               type="primary"

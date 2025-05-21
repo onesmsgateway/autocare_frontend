@@ -4,6 +4,7 @@ import {
   Col,
   Form,
   InputNumber,
+  Radio,
   Row,
   Skeleton,
   TimePicker,
@@ -41,6 +42,7 @@ export default function BirthdayConfiguration() {
     form.setFieldsValue({
       send_day_before: config?.send_day_before,
       send_hours: config ? dayjs(config.send_hours, "HH:mm:ss") : undefined,
+      message_type: config?.message_type || "sms",
     });
   }, [form, config]);
   const onFinish = async (values) => {
@@ -111,6 +113,26 @@ export default function BirthdayConfiguration() {
                 ]}
               >
                 <InputNumber placeholder="Số ngày" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[8, 8]}>
+            <Col xl={12} lg={12} md={24} sm={24}>
+              
+              <Form.Item
+                label="Loại tin nhắn"
+                name="message_type"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng chọn loại tin nhắn",
+                  },
+                ]}
+              >
+                <Radio.Group>
+                  <Radio value="sms">SMS</Radio>
+                  <Radio value="zns">ZNS</Radio>
+                </Radio.Group>
               </Form.Item>
             </Col>
           </Row>

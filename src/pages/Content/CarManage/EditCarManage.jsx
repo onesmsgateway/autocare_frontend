@@ -124,7 +124,7 @@ const EditCarManage = forwardRef(function EditCarManage(props, ref) {
       </Tooltip>
 
       <Modal
-        title="Sửa thông tin xe"
+        title="Sửa thông tin xe khách hàng"
         open={isModalOpenEdit}
         footer={null}
         width={850}

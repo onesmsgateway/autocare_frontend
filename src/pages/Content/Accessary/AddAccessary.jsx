@@ -22,6 +22,7 @@ import {
   getListAccessarys,
 } from "../../../services/accessarys/accessarys";
 import { reGexIsNumber } from "../../../utils/config";
+import { useEffect } from "react";
 const { Option } = Select;
 export default function AddAccessary({
   currentPage,

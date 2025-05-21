@@ -251,7 +251,7 @@ export default function TableCarManage() {
   const navigate = useNavigate();
   return (
     <div>
-      <h2>Danh sách xe</h2>
+      <h2>Danh sách xe khách hàng</h2>
       <Breadcrumb
         separator=">"
         items={[
@@ -263,8 +263,8 @@ export default function TableCarManage() {
             title: "Bảo dưỡng xe",
           },
           {
-            title: "Danh sách xe",
-            href: "/car-manage",
+            title: "Danh sách xe khách hàng",
+            href: "/car-customer-manage",
           },
         ]}
       />

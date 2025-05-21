@@ -10,6 +10,7 @@ import {
   Row,
   Tooltip,
   Select,
+  Typography,
 } from "antd";
 import { useDispatch } from "react-redux";
 import useEditHandler from "../../../../components/CustomHooks/useEditHandler";
@@ -50,13 +51,14 @@ const EditCompany = forwardRef(function EditCompany(props, ref) {
         manager_name: updateRecord.manager_name,
         software_package: updateRecord.software_package,
         maintain_message_amount: updateRecord.maintain_message_amount,
-        // user_zns: "Viettel",
+        user_zns: updateRecord.user_zns,
+        oa_zns: updateRecord.oa_zns
         // pass_zns: "Viettel",
         // template_zns_maintain_schedule_reminder: "Viettel",
         // teamplate_zns_thank_maintain_schedule: "Viettel",
       });
     }
-  }, [updateRecord, form,isModalOpenEdit]);
+  }, [updateRecord, form, isModalOpenEdit]);
   return (
     <div>
       <Tooltip placement="top" title="Sửa">
@@ -86,7 +88,7 @@ const EditCompany = forwardRef(function EditCompany(props, ref) {
           requiredMark=""
           form={form}
         >
-          <Row gutter={[8, 8]}>
+           <Row gutter={[8, 8]}>
             <Col xl={8} lg={8} md={8} sm>
               <Form.Item
                 label="Tên công ty"
@@ -137,20 +139,20 @@ const EditCompany = forwardRef(function EditCompany(props, ref) {
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
-            <Col xl={8} lg={8} md={8} sm>
+            {/* <Col xl={8} lg={8} md={8} sm>
               <Form.Item
                 label="Key"
                 name="secret_key"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Vui lòng nhập tên công ty",
                   },
                 ]}
               >
                 <Input placeholder="Mã key" />
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col xl={8} lg={8} md={8} sm>
               <Form.Item
                 label="Người quản lý"
@@ -184,30 +186,41 @@ const EditCompany = forwardRef(function EditCompany(props, ref) {
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={[8, 8]}>
             <Col xl={8} lg={8} md={8} sm>
               {" "}
               <Form.Item
-                label="Số tiền nhắn tin BD"
-                name="maintain_message_amount"
+                label="OA Zns"
+                name="oa_zns"
                 rules={[
                   {
-                    required: true,
-                    message: "Vui lòng nhập số tiền",
+                    required: false,
+                    message: "Vui lòng nhập oa zns",
                   },
                 ]}
               >
-                <InputNumber
-                  formatter={(value) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                  placeholder="Số tiền"
-                />
+                <Input placeholder="OA Zns" />
               </Form.Item>
             </Col>
           </Row>
+          <Row gutter={[8, 8]}>
+           
+            <Col xl={8} lg={8} md={8} sm>
+              {" "}
+              <Form.Item
+                label="User Zns"
+                name="user_zns"
+                rules={[
+                  {
+                    required: false,
+                    message: "Vui lòng nhập user zns",
+                  },
+                ]}
+              >
+                <Input placeholder="User Zns" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row><Typography.Text type="secondary" style={{ fontSize: "12px" }}>Thông tin đăng nhập phục vụ cho việc gửi tin nhắn Zalo.</Typography.Text></Row>
           <Form.Item>
             <Button
               type="primary"
