@@ -94,7 +94,7 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
       setCountdown(60); // 60 giây
       setIsOtpResendDisabled(true);
       setOtpLoading(true);
-      const response = await store.dispatch(generateUpdateOtp({ 'object_id': record?.id, 'object_type' : 'accessary' }));
+      const response = await store.dispatch(generateUpdateOtp({ 'object_id': record?.id, 'object_type' : 'accessary', 'type': 'accessary_update'  }));
       if (response?.payload?.success) {
         message.success('Đã gửi mã OTP');
         setOtpPhone(response.phone);
@@ -141,13 +141,13 @@ const EditAccessary = forwardRef(function EditAccessary(props, ref) {
       setOtpLoading(false);
     }
   };
-
+  const { userData } = useSelector((state) => state.user);
   // Xử lý submit form
   const handleFinish = (values) => {
     const hasInventoryChange =
       values.inventory_quantity !== updateRecord.inventory_quantity;
-
-    if (hasInventoryChange) {
+      const authType = userData?.data.type;
+    if (hasInventoryChange && authType === 'MANAGER') {
       // Sinh OTP nếu thay đổi số lượng
       handleGenerateOtp(values);
     } else {

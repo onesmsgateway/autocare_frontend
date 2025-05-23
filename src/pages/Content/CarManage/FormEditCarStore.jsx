@@ -12,7 +12,7 @@ import {
   Tooltip,
   message 
 } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useEditHandler from "../../../components/CustomHooks/useEditHandler";
 import { reGexLicensePlates } from "../../../utils/config";
 import { editMotorStore, getListMotorStore } from "../../../services/motorStore/motorStore";
@@ -66,14 +66,14 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
   const [otpForm] = Form.useForm();
   const [isOtpResendDisabled, setIsOtpResendDisabled] = useState(false);
   const [pendingUpdateData, setPendingUpdateData] = useState(null);
-  // Sinh OTP
+  //Sinh OTP
   const handleGenerateOtp = async (values) => {
     try {
       // Reset countdown
       setCountdown(60); // 60 giây
       setIsOtpResendDisabled(true);
       setOtpLoading(true);
-      const response = await store.dispatch(generateUpdateOtp({ 'object_id': record?.id, 'object_type' : 'motor' }));
+      const response = await store.dispatch(generateUpdateOtp({ 'object_id': record?.id, 'object_type' : 'motor', 'type': 'motor_update' }));
       if (response?.payload?.success) {
         message.success('Đã gửi mã OTP');
         // setOtpPhone(response.phone);
@@ -88,6 +88,7 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
       setOtpLoading(false);
     }
   };
+
 
   // Xác thực OTP
   const handleVerifyOtp = async () => {
@@ -120,12 +121,14 @@ const FormEditCarStore = forwardRef(function FormEditCarStore(props, ref) {
     }
   };
 
+  const { userData } = useSelector((state) => state.user);
   // Xử lý submit form
   const handleFinish = (values) => {
     const hasInventoryChange =
       values.quantity !== updateRecord.quantity;
+      const authType = userData?.data.type;
 
-    if (hasInventoryChange) {
+    if (hasInventoryChange && authType === 'MANAGER') {
       // Sinh OTP nếu thay đổi số lượng
       handleGenerateOtp(values);
     } else {
